@@ -100,15 +100,17 @@ const getRecruiters = async (launchOptions, linkedConfig, storageStatePath = './
     const recruiterSearchConfig = linkedConfig.recruiterSearch
 
     // get URL, minPage and maxPage
-    const url = recruiterSearchConfig.url
+    const keyword = recruiterSearchConfig.keyword
     const minPage = recruiterSearchConfig.minPage || 1
     const maxPage = recruiterSearchConfig.maxPage
 
+    console.log(`Searching LinkedIn for ${keyword.yellow}, pages ${String(minPage).yellow}-${String(maxPage).yellow}`)
+
     for(let i = minPage; i <= maxPage; i++) {
-        console.log(`Getting page ${String(i).yellow}`)
-        let normalizedUrl = url
+        console.log(`Getting page ${String(i).yellow} for keyword ${keyword.yellow}`)
+        let normalizedUrl = `https://www.linkedin.com/search/results/people/?industry=%5B%224%22%2C%2296%22%5D&keywords=${keyword}&origin=FACETED_SEARCH`
         if (i > 1) {
-            normalizedUrl = url + '&page=' + i
+            normalizedUrl = normalizedUrl + '&page=' + i
         }
         await page.goto(normalizedUrl)
 

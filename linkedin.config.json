@@ -1,0 +1,7 @@
+{
+    "recruiterSearch": {
+        "keyword": "recruiter",
+        "minPage": 1,
+        "maxPage": 50
+    }
+}
