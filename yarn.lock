@@ -116,10 +116,29 @@ __metadata:
     "@playwright/test": ^1.25.0
     colors: ^1.4.0
     dotenv: ^16.0.1
+    lodash: ^4.17.21
+    parse-address: ^1.1.2
     playwright: ^1.25.0
+    yaml: ^2.1.1
     yargs: ^17.5.1
   languageName: unknown
   linkType: soft
+
+"lodash@npm:^4.17.21":
+  version: 4.17.21
+  resolution: "lodash@npm:4.17.21"
+  checksum: eb835a2e51d381e561e508ce932ea50a8e5a68f4ebdd771ea240d3048244a8d13658acbd502cd4829768c56f2e16bdd4340b9ea141297d472517b83868e677f7
+  languageName: node
+  linkType: hard
+
+"parse-address@npm:^1.1.2":
+  version: 1.1.2
+  resolution: "parse-address@npm:1.1.2"
+  dependencies:
+    xregexp: ^3.1.1
+  checksum: ad2cc221fb2a9d98131265a95d2b912f5e5a0bbc69e4b3dc14b478497c621f56a48eb74554a273406cb4c8676d75619dcd2b4c7e052e5c4287989ba8e7fd342e
+  languageName: node
+  linkType: hard
 
 "playwright-core@npm:1.25.0":
   version: 1.25.0
@@ -179,10 +198,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"xregexp@npm:^3.1.1":
+  version: 3.2.0
+  resolution: "xregexp@npm:3.2.0"
+  checksum: 21bde05dfec7cea64229436c3c20640c68227d023227a08face023d849281b01ddaf327c6bbed1fc35209d7b7556e978f5f17b83915b7171c694c65ea5b7706f
+  languageName: node
+  linkType: hard
+
 "y18n@npm:^5.0.5":
   version: 5.0.8
   resolution: "y18n@npm:5.0.8"
   checksum: 54f0fb95621ee60898a38c572c515659e51cc9d9f787fb109cef6fde4befbe1c4602dc999d30110feee37456ad0f1660fa2edcfde6a9a740f86a290999550d30
+  languageName: node
+  linkType: hard
+
+"yaml@npm:^2.1.1":
+  version: 2.1.1
+  resolution: "yaml@npm:2.1.1"
+  checksum: f48bb209918aa57cfaf78ef6448d1a1f8187f45c746f933268b7023dc59e5456004611879126c9bb5ea55b0a2b1c2b392dfde436931ece0c703a3d754562bb96
   languageName: node
   linkType: hard
 

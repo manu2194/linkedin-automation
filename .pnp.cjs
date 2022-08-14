@@ -36,7 +36,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@playwright/test", "npm:1.25.0"],\
             ["colors", "npm:1.4.0"],\
             ["dotenv", "npm:16.0.1"],\
+            ["lodash", "npm:4.17.21"],\
+            ["parse-address", "npm:1.1.2"],\
             ["playwright", "npm:1.25.0"],\
+            ["yaml", "npm:2.1.1"],\
             ["yargs", "npm:17.5.1"]\
           ],\
           "linkType": "SOFT"\
@@ -174,10 +177,32 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@playwright/test", "npm:1.25.0"],\
             ["colors", "npm:1.4.0"],\
             ["dotenv", "npm:16.0.1"],\
+            ["lodash", "npm:4.17.21"],\
+            ["parse-address", "npm:1.1.2"],\
             ["playwright", "npm:1.25.0"],\
+            ["yaml", "npm:2.1.1"],\
             ["yargs", "npm:17.5.1"]\
           ],\
           "linkType": "SOFT"\
+        }]\
+      ]],\
+      ["lodash", [\
+        ["npm:4.17.21", {\
+          "packageLocation": "./.yarn/cache/lodash-npm-4.17.21-6382451519-eb835a2e51.zip/node_modules/lodash/",\
+          "packageDependencies": [\
+            ["lodash", "npm:4.17.21"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["parse-address", [\
+        ["npm:1.1.2", {\
+          "packageLocation": "./.yarn/cache/parse-address-npm-1.1.2-2604170103-ad2cc221fb.zip/node_modules/parse-address/",\
+          "packageDependencies": [\
+            ["parse-address", "npm:1.1.2"],\
+            ["xregexp", "npm:3.2.0"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["playwright", [\
@@ -242,11 +267,29 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["xregexp", [\
+        ["npm:3.2.0", {\
+          "packageLocation": "./.yarn/cache/xregexp-npm-3.2.0-73a3215c8f-21bde05dfe.zip/node_modules/xregexp/",\
+          "packageDependencies": [\
+            ["xregexp", "npm:3.2.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["y18n", [\
         ["npm:5.0.8", {\
           "packageLocation": "./.yarn/cache/y18n-npm-5.0.8-5f3a0a7e62-54f0fb9562.zip/node_modules/y18n/",\
           "packageDependencies": [\
             ["y18n", "npm:5.0.8"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["yaml", [\
+        ["npm:2.1.1", {\
+          "packageLocation": "./.yarn/cache/yaml-npm-2.1.1-e717f9b915-f48bb20991.zip/node_modules/yaml/",\
+          "packageDependencies": [\
+            ["yaml", "npm:2.1.1"]\
           ],\
           "linkType": "HARD"\
         }]\
