@@ -1,0 +1,14 @@
+# - 
+#   "Hi {{ recruiter.first_name }}, how are you doing? I'm a {{ candidate.position }} with 3 years of experience in web application development and automation. Can I send you my resume so that we can explore the possibility of working together at {{ recruiter.company }}? Thank you and have a great day.
+  
+#   {{ candidate.first_name }}"
+
+- 
+  "Hi {{ recruiter.first_name }}. My name is {{ candidate.first_name }} and I'm a {{ candidate.position }}. If you have a second, I'd love to connect with you and discuss how my {{ candidate.position | lower }} skills & experiences might help add value to {{ recruiter.company }}. Thank you and have a great day.
+  
+  - Manu"
+
+# - 
+#   "Hi {{ recruiter.first_name }}. Although we've never had the oppurtunity to work together, I've heard great things about {{ recruiter.company }}. I'd love to connect with you and discuss how my {{ candidate.position | lower }} skills & experiences might help add value to {{ recruiter.company }}. Thank you and have a great day.
+  
+#   {{ candidate.first_name }}"

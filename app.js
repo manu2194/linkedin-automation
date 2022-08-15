@@ -2,6 +2,7 @@ var yargs = require("yargs/yargs");
 var { hideBin } = require("yargs/helpers");
 var loginCommand = require("./commands/login");
 var getRecruitersCommand = require("./commands/getRecruiters");
+var sendConnectionsCommand = require("./commands/sendConnections");
 require("dotenv").config();
 
 yargs(hideBin(process.argv))
@@ -26,4 +27,5 @@ yargs(hideBin(process.argv))
   })
   .command(loginCommand)
   .command(getRecruitersCommand)
+  .command(sendConnectionsCommand)
   .help().argv;

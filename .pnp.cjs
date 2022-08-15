@@ -37,6 +37,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["colors", "npm:1.4.0"],\
             ["dotenv", "npm:16.0.1"],\
             ["lodash", "npm:4.17.21"],\
+            ["nunjucks", "virtual:c6e5f486a3556cec34aae12a77fe2ae8b9ca1130b2c6766851436ca89b22f8dc8950efb0c359de146c75efa79ce3c8b8f14b36cb82a998c3fd765a67956fc9d1#npm:3.2.3"],\
             ["parse-address", "npm:1.1.2"],\
             ["playwright", "npm:1.25.0"],\
             ["yaml", "npm:2.1.1"],\
@@ -65,6 +66,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["a-sync-waterfall", [\
+        ["npm:1.0.1", {\
+          "packageLocation": "./.yarn/cache/a-sync-waterfall-npm-1.0.1-f6b6b49568-534948b50d.zip/node_modules/a-sync-waterfall/",\
+          "packageDependencies": [\
+            ["a-sync-waterfall", "npm:1.0.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["ansi-regex", [\
         ["npm:5.0.1", {\
           "packageLocation": "./.yarn/cache/ansi-regex-npm-5.0.1-c963a48615-2aa4bb54ca.zip/node_modules/ansi-regex/",\
@@ -80,6 +90,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["ansi-styles", "npm:4.3.0"],\
             ["color-convert", "npm:2.0.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["asap", [\
+        ["npm:2.0.6", {\
+          "packageLocation": "./.yarn/cache/asap-npm-2.0.6-36714d439d-b296c92c4b.zip/node_modules/asap/",\
+          "packageDependencies": [\
+            ["asap", "npm:2.0.6"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -120,6 +139,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/colors-npm-1.4.0-7e2cf12234-98aa2c2418.zip/node_modules/colors/",\
           "packageDependencies": [\
             ["colors", "npm:1.4.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["commander", [\
+        ["npm:5.1.0", {\
+          "packageLocation": "./.yarn/cache/commander-npm-5.1.0-7e939e7832-0b7fec1712.zip/node_modules/commander/",\
+          "packageDependencies": [\
+            ["commander", "npm:5.1.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -178,6 +206,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["colors", "npm:1.4.0"],\
             ["dotenv", "npm:16.0.1"],\
             ["lodash", "npm:4.17.21"],\
+            ["nunjucks", "virtual:c6e5f486a3556cec34aae12a77fe2ae8b9ca1130b2c6766851436ca89b22f8dc8950efb0c359de146c75efa79ce3c8b8f14b36cb82a998c3fd765a67956fc9d1#npm:3.2.3"],\
             ["parse-address", "npm:1.1.2"],\
             ["playwright", "npm:1.25.0"],\
             ["yaml", "npm:2.1.1"],\
@@ -191,6 +220,31 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/lodash-npm-4.17.21-6382451519-eb835a2e51.zip/node_modules/lodash/",\
           "packageDependencies": [\
             ["lodash", "npm:4.17.21"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["nunjucks", [\
+        ["npm:3.2.3", {\
+          "packageLocation": "./.yarn/cache/nunjucks-npm-3.2.3-ae8b5fd14c-9d0125acf9.zip/node_modules/nunjucks/",\
+          "packageDependencies": [\
+            ["nunjucks", "npm:3.2.3"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:c6e5f486a3556cec34aae12a77fe2ae8b9ca1130b2c6766851436ca89b22f8dc8950efb0c359de146c75efa79ce3c8b8f14b36cb82a998c3fd765a67956fc9d1#npm:3.2.3", {\
+          "packageLocation": "./.yarn/__virtual__/nunjucks-virtual-3fe2d92ea9/0/cache/nunjucks-npm-3.2.3-ae8b5fd14c-9d0125acf9.zip/node_modules/nunjucks/",\
+          "packageDependencies": [\
+            ["nunjucks", "virtual:c6e5f486a3556cec34aae12a77fe2ae8b9ca1130b2c6766851436ca89b22f8dc8950efb0c359de146c75efa79ce3c8b8f14b36cb82a998c3fd765a67956fc9d1#npm:3.2.3"],\
+            ["@types/chokidar", null],\
+            ["a-sync-waterfall", "npm:1.0.1"],\
+            ["asap", "npm:2.0.6"],\
+            ["chokidar", null],\
+            ["commander", "npm:5.1.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/chokidar",\
+            "chokidar"\
           ],\
           "linkType": "HARD"\
         }]\

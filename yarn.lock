@@ -24,6 +24,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"a-sync-waterfall@npm:^1.0.0":
+  version: 1.0.1
+  resolution: "a-sync-waterfall@npm:1.0.1"
+  checksum: 534948b50d6787c2dd5b7e89179b30c0fd96ac80a662d0f92eaa568cfffb36f1eea4aa720e3a21572d8b5f8686940954ac9d8c7667bcc719c1317ae3bdf86fe0
+  languageName: node
+  linkType: hard
+
 "ansi-regex@npm:^5.0.1":
   version: 5.0.1
   resolution: "ansi-regex@npm:5.0.1"
@@ -37,6 +44,13 @@ __metadata:
   dependencies:
     color-convert: ^2.0.1
   checksum: 513b44c3b2105dd14cc42a19271e80f386466c4be574bccf60b627432f9198571ebf4ab1e4c3ba17347658f4ee1711c163d574248c0c1cdc2d5917a0ad582ec4
+  languageName: node
+  linkType: hard
+
+"asap@npm:^2.0.3":
+  version: 2.0.6
+  resolution: "asap@npm:2.0.6"
+  checksum: b296c92c4b969e973260e47523207cd5769abd27c245a68c26dc7a0fe8053c55bb04360237cb51cab1df52be939da77150ace99ad331fb7fb13b3423ed73ff3d
   languageName: node
   linkType: hard
 
@@ -71,6 +85,13 @@ __metadata:
   version: 1.4.0
   resolution: "colors@npm:1.4.0"
   checksum: 98aa2c2418ad87dedf25d781be69dc5fc5908e279d9d30c34d8b702e586a0474605b3a189511482b9d5ed0d20c867515d22749537f7bc546256c6014f3ebdcec
+  languageName: node
+  linkType: hard
+
+"commander@npm:^5.1.0":
+  version: 5.1.0
+  resolution: "commander@npm:5.1.0"
+  checksum: 0b7fec1712fbcc6230fcb161d8d73b4730fa91a21dc089515489402ad78810547683f058e2a9835929c212fead1d6a6ade70db28bbb03edbc2829a9ab7d69447
   languageName: node
   linkType: hard
 
@@ -117,6 +138,7 @@ __metadata:
     colors: ^1.4.0
     dotenv: ^16.0.1
     lodash: ^4.17.21
+    nunjucks: ^3.2.3
     parse-address: ^1.1.2
     playwright: ^1.25.0
     yaml: ^2.1.1
@@ -128,6 +150,24 @@ __metadata:
   version: 4.17.21
   resolution: "lodash@npm:4.17.21"
   checksum: eb835a2e51d381e561e508ce932ea50a8e5a68f4ebdd771ea240d3048244a8d13658acbd502cd4829768c56f2e16bdd4340b9ea141297d472517b83868e677f7
+  languageName: node
+  linkType: hard
+
+"nunjucks@npm:^3.2.3":
+  version: 3.2.3
+  resolution: "nunjucks@npm:3.2.3"
+  dependencies:
+    a-sync-waterfall: ^1.0.0
+    asap: ^2.0.3
+    commander: ^5.1.0
+  peerDependencies:
+    chokidar: ^3.3.0
+  peerDependenciesMeta:
+    chokidar:
+      optional: true
+  bin:
+    nunjucks-precompile: bin/precompile
+  checksum: 9d0125acf917166675af2d9b5d525b6d3edaba68ec6f8c92edee8ad05140cfa8aef12feb46f4c3da52ed2836cadfb9d26fbf1fa9d9be6bef4660d03ce1e89dbe
   languageName: node
   linkType: hard
 
