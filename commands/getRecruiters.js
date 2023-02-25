@@ -20,15 +20,15 @@ exports.builder = {
   keyword: {
     alias: "k",
     type: "string",
-    describe: "The keyword to search for",
+    describe: "The keyword to search for. This will override the keyword in the config file.",
   },
   minPage: {
     type: "number",
-    describe: "The minimum page to search for",
+    describe: "The minimum page to search for. This will override the minPage in the config file.",
   },
   maxPage: {
     type: "number",
-    describe: "The maximum page to search for",
+    describe: "The maximum page to search for. This will override the maxPage in the config file.",
   },
 };
 
