@@ -48,15 +48,15 @@ exports.handler = async (argv) => {
   const config = yaml.parse(fs.readFileSync(configYamlPath, "utf8"));
 
   // merge config with keyword and minPage and maxPage
-  const mergedConfig = _.merge(config,{
+  const mergedConfig = _.merge(config, {
     recruiterSearch: {
       keyword,
       minPage,
       maxPage,
-    }, 
+    },
   });
 
-  const recruiters = await getRecruiters(
+  const newlyFetchedRecruiters = await getRecruiters(
     {
       headless,
       slowMo,
@@ -65,6 +65,27 @@ exports.handler = async (argv) => {
     storageStatePath
   );
 
+  let mergedRecruiters = newlyFetchedRecruiters;
+
+  // Check if an output file already exists
+  if (fs.existsSync(outputFilePath)) {
+    // If the output file exists, read in its contents
+    const previouslyFetchedRecruiters = JSON.parse(fs.readFileSync(outputFilePath));
+    
+    // Merge the new recruiter data with the existing data, using the recruiter's URL as the unique identifier
+    mergedRecruiters = _.mergeWith(
+      previouslyFetchedRecruiters,
+      newlyFetchedRecruiters,
+      (objValue, srcValue) => {
+        if (objValue.url == srcValue.url) {
+          // If a recruiter with the same URL already exists in the old data, replace it with the new data
+          return srcValue;
+        }
+      }
+    );
+  }
+
+
   // write output to file
-  fs.writeFileSync(outputFilePath, JSON.stringify(recruiters, null, 2));
+  fs.writeFileSync(outputFilePath, JSON.stringify(mergedRecruiters, null, 2));
 };
