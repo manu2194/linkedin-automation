@@ -1,0 +1,9 @@
+candidate:
+  first_name: Manu
+  last_name: Venugopal
+  position: Software Engineer
+  company: Secunetics
+recruiterSearch:
+  keyword: recruiter
+  minPage: 1
+  maxPage: 50

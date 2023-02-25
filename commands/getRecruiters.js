@@ -1,6 +1,7 @@
 var { getRecruiters } = require("../operations");
 var _ = require("lodash");
 var fs = require("fs");
+var yaml = require("yaml");
 require("dotenv").config();
 
 exports.command = "get-recruiters <o|output>";
@@ -12,7 +13,7 @@ exports.aliases = ["gr"];
 exports.builder = {
   config: {
     alias: "c",
-    default: "./linkedin.config.json",
+    default: "./linkedin.config.yaml",
     describe: "The path to the LinkedIn configuration file",
     type: "string",
   },
@@ -35,7 +36,7 @@ exports.handler = async (argv) => {
   const {
     headless,
     slowMo,
-    config: configJsonPath,
+    config: configYamlPath,
     storageStatePath,
     output: outputFilePath,
     keyword,
@@ -43,8 +44,8 @@ exports.handler = async (argv) => {
     maxPage,
   } = argv;
 
-  // parse config as JSON
-  const config = JSON.parse(fs.readFileSync(configJsonPath));
+  // parse config as YAML
+  const config = yaml.parse(fs.readFileSync(configYamlPath, "utf8"));
 
   // merge config with keyword and minPage and maxPage
   const mergedConfig = _.merge(config,{
