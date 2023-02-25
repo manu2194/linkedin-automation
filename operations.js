@@ -52,8 +52,9 @@ const login = async (
 };
 
 /**
- * Parse recruiter details from a search result like `name`, `url`, `location` and `position`
- * @param {*} locator
+ * Parse recruiter details from a search result like `name`, `url`, `location`, `position` and `connected`
+ * 
+ * @param {} locator
  * @returns
  */
 const parseRecruiterSearchResult = async (locator) => {
@@ -62,7 +63,19 @@ const parseRecruiterSearchResult = async (locator) => {
     url: null,
     location: null,
     position: null,
+    connected: false,
   };
+
+  // get badge
+  const badgeLocator = await locator.locator(".entity-result__badge");
+  const badgeTextLocator = await badgeLocator.locator("span.entity-result__badge-text span[aria-hidden='true']");
+  const badgeText = await badgeTextLocator.innerText();
+
+  if (badgeText.includes("1st")) {
+    result.connected = true;
+  }
+
+
 
   // get name
   const nameLocator = await locator.locator(".entity-result__title-line >> a");
@@ -95,6 +108,19 @@ const parseRecruiterSearchResult = async (locator) => {
 
 /**
  * Get recruiters from LinkedIn
+ * 
+ * defines an asynchronous function called getRecruiters that takes in three arguments: 
+ * launchOptions, linkedInConfig, and storageStatePath.
+ * 
+ * The function uses Playwright, an automation library, to open a Chromium browser and navigate
+ * to a LinkedIn search page for recruiters based on the configuration information provided. It
+ * then iterates through the search results, extracts information about each recruiter and
+ * stores it in an array. Finally, it closes the browser, and returns the array of recruiter data.
+ * The function uses the parseRecruiterSearchResult function to extract information about each 
+ * recruiter from the search results page, and it waits for the search results to load before 
+ * proceeding with each iteration. The function also logs output to the console to provide 
+ * status updates on its progress.
+ * 
  * @param {object} launchOptions  - The options to pass to the launch method of Playwright
  * @param {object} linkedInConfig  - The configuration for the LinkedIn operations
  * @param {string} storageStatePath  - The path to the storage state JSON file
@@ -118,6 +144,7 @@ const getRecruiters = async (
 
   // get URL, minPage and maxPage
   const keyword = recruiterSearchConfig.keyword;
+  const industry = recruiterSearchConfig.industry;
   const minPage = recruiterSearchConfig.minPage || 1;
   const maxPage = recruiterSearchConfig.maxPage;
 
@@ -127,11 +154,24 @@ const getRecruiters = async (
     }-${String(maxPage).yellow}`
   );
 
+  // Search URL for LinkedIn People Search
+  const baseLinkedPeopleUrl = "https://www.linkedin.com/search/results/people/";
+
+  // Build the parameters portion of the URL
+  let params = [];
+  if (industry) {
+    params.push(industry);
+  }
+  params.push(`keywords=${keyword}`);
+  params.push("origin=FACETED_SEARCH");
+  
+  // Combine the base URL and the parameters
+  let normalizedUrl = `${baseLinkedPeopleUrl}?${params.join("&")}`;
+
   for (let i = minPage; i <= maxPage; i++) {
     console.log(
       `Getting page ${String(i).yellow} for keyword ${keyword.yellow}`
     );
-    let normalizedUrl = `https://www.linkedin.com/search/results/people/?industry=%5B%224%22%2C%2296%22%5D&keywords=${keyword}&origin=FACETED_SEARCH`;
     if (i > 1) {
       normalizedUrl = normalizedUrl + "&page=" + i;
     }
