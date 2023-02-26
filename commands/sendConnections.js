@@ -1,4 +1,4 @@
-var { sendConnections } = require("../operations");
+var sendConnections = require("../operations/sendConnections");
 var _ = require("lodash");
 var fs = require("fs");
 var path = require("path");
@@ -15,7 +15,7 @@ exports.aliases = ["sc"];
 exports.builder = {
   config: {
     alias: "c",
-    default: "./linkedin.config.json",
+    default: "./linkedin.config.yaml",
     describe: "The path to the LinkedIn configuration file",
     type: "string",
   },
@@ -34,15 +34,15 @@ exports.builder = {
     alias: "m",
     type: "string",
     describe: "The path to the message templates YAML file",
-    default: './message-templates.yaml',
-  }
+    default: "./message-templates.yaml",
+  },
 };
 
 exports.handler = async (argv) => {
   const {
     headless,
     slowMo,
-    config: configJsonPath,
+    config: configYamlPath,
     storageStatePath,
     results: resultsFilePath,
     recruiters: recruitersJsonPath,
@@ -64,14 +64,16 @@ exports.handler = async (argv) => {
     fs.writeFileSync(resultsFilePath, "{}");
   }
 
-  // parse config as JSON
-  const config = JSON.parse(fs.readFileSync(configJsonPath));
+  // parse config as YAML
+  const config = yaml.parse(fs.readFileSync(configYamlPath, "utf8"));
 
   // parse recruiters as JSON
   const recruiters = JSON.parse(fs.readFileSync(recruitersJsonPath));
 
   // parse message templates as YAML
-  const messageTemplates = yaml.parse(fs.readFileSync(messageTemplatesPath, "utf8"));
+  const messageTemplates = yaml.parse(
+    fs.readFileSync(messageTemplatesPath, "utf8")
+  );
 
   // send connections to recruiters
   const results = await sendConnections(

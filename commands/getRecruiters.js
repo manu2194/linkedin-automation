@@ -1,4 +1,4 @@
-var { getRecruiters } = require("../operations");
+var getRecruiters = require("../operations/getRecruiters");
 var _ = require("lodash");
 var fs = require("fs");
 var yaml = require("yaml");
@@ -46,20 +46,20 @@ exports.builder = {
  *                                   - connected: boolean
  * @param {string} oldRecruitersFilePath - The path to the old recruiters file to merge with the new recruiters
  */
-const mergeRecruiters = (
-  newRecruiters,
-  oldRecruitersFilePath
-) => {
+const mergeRecruiters = (newRecruiters, oldRecruitersFilePath) => {
+  console.log(
+    `\tMerging ${newRecruiters.length} recruiters with ${oldRecruitersFilePath}...`
+  );
 
-  console.log(`\tMerging ${newRecruiters.length} recruiters with ${oldRecruitersFilePath}...`)
-  
   let oldRecruiters = [];
 
   try {
     const oldRecruitersFile = fs.readFileSync(oldRecruitersFilePath);
     oldRecruiters = JSON.parse(oldRecruitersFile);
   } catch (err) {
-    console.log(`\tNo file ${oldRecruitersFilePath}. Will create a new file`.yellow);
+    console.log(
+      `\tNo file ${oldRecruitersFilePath}. Will create a new file`.yellow
+    );
   }
 
   const mergedRecruiters = _.uniqBy(
@@ -71,7 +71,11 @@ const mergeRecruiters = (
     oldRecruitersFilePath,
     JSON.stringify(mergedRecruiters, null, 2)
   );
-  console.log(`\tMerged recruiters saved to ${oldRecruitersFilePath}. Added ${mergedRecruiters.length - oldRecruiters.length} new recruiters.`.green);
+  console.log(
+    `\tMerged recruiters saved to ${oldRecruitersFilePath}. Added ${
+      mergedRecruiters.length - oldRecruiters.length
+    } new recruiters.`.green
+  );
 };
 
 exports.handler = async (argv) => {

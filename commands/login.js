@@ -1,4 +1,4 @@
-var { login } = require("../operations");
+var login = require("../operations/login");
 require("dotenv").config();
 
 exports.command = "login";
