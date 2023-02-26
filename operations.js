@@ -124,11 +124,13 @@ const parseRecruiterSearchResult = async (locator) => {
  * @param {object} launchOptions  - The options to pass to the launch method of Playwright
  * @param {object} linkedInConfig  - The configuration for the LinkedIn operations
  * @param {string} storageStatePath  - The path to the storage state JSON file
+ * @param {function} mergeRecruitersCallback - A callback function to merge recruiters
  */
 const getRecruiters = async (
   launchOptions,
   linkedInConfig,
-  storageStatePath = "./storageState.json"
+  storageStatePath = "./storageState.json",
+  mergeRecruitersCallback
 ) => {
   const recruiters = [];
   const browser = await playwright.chromium.launch(launchOptions);
@@ -169,6 +171,7 @@ const getRecruiters = async (
   let normalizedUrl = `${baseLinkedPeopleUrl}?${params.join("&")}`;
 
   for (let i = minPage; i <= maxPage; i++) {
+    const recruitersPerPage = [];
     console.log(
       `Getting page ${String(i).yellow} for keyword ${keyword.yellow}`
     );
@@ -186,19 +189,21 @@ const getRecruiters = async (
     );
 
     const count = await recruiterLinks.count();
-    console.log(`Found ${String(count).yellow} recruiters`);
+    console.log(`\tFound ${String(count)} recruiters`.green);
 
     for (let j = 0; j < count; j++) {
       const recruiterLink = await recruiterLinks.nth(j);
       const recruiter = await parseRecruiterSearchResult(recruiterLink);
-      recruiters.push(recruiter);
+      recruitersPerPage.push(recruiter);
     }
+    mergeRecruitersCallback(recruitersPerPage);
   }
 
   // teardown
   await context.close();
   await browser.close();
 
+  // merge recruiters
   return recruiters;
 };
 

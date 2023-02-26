@@ -20,16 +20,58 @@ exports.builder = {
   keyword: {
     alias: "k",
     type: "string",
-    describe: "The keyword to search for. This will override the keyword in the config file.",
+    describe:
+      "The keyword to search for. This will override the keyword in the config file.",
   },
   minPage: {
     type: "number",
-    describe: "The minimum page to search for. This will override the minPage in the config file.",
+    describe:
+      "The minimum page to search for. This will override the minPage in the config file.",
   },
   maxPage: {
     type: "number",
-    describe: "The maximum page to search for. This will override the maxPage in the config file.",
+    describe:
+      "The maximum page to search for. This will override the maxPage in the config file.",
   },
+};
+
+/**
+ * Merges the given new recruiters with the content of the old recruiters file, overwriting the old file with the merged content.
+ *
+ * @param {Object[]} newRecruiters - The list of new recruiters to merge. Each recruiter should have the following properties:
+ *                                   - name: string
+ *                                   - url: string
+ *                                   - location: string
+ *                                   - position: string
+ *                                   - connected: boolean
+ * @param {string} oldRecruitersFilePath - The path to the old recruiters file to merge with the new recruiters
+ */
+const mergeRecruiters = (
+  newRecruiters,
+  oldRecruitersFilePath
+) => {
+
+  console.log(`\tMerging ${newRecruiters.length} recruiters with ${oldRecruitersFilePath}...`)
+  
+  let oldRecruiters = [];
+
+  try {
+    const oldRecruitersFile = fs.readFileSync(oldRecruitersFilePath);
+    oldRecruiters = JSON.parse(oldRecruitersFile);
+  } catch (err) {
+    console.log(`\tNo file ${oldRecruitersFilePath}. Will create a new file`.yellow);
+  }
+
+  const mergedRecruiters = _.uniqBy(
+    [...newRecruiters, ...oldRecruiters],
+    "url"
+  );
+
+  fs.writeFileSync(
+    oldRecruitersFilePath,
+    JSON.stringify(mergedRecruiters, null, 2)
+  );
+  console.log(`\tMerged recruiters saved to ${oldRecruitersFilePath}. Added ${mergedRecruiters.length - oldRecruiters.length} new recruiters.`.green);
 };
 
 exports.handler = async (argv) => {
@@ -56,36 +98,13 @@ exports.handler = async (argv) => {
     },
   });
 
-  const newlyFetchedRecruiters = await getRecruiters(
+  await getRecruiters(
     {
       headless,
       slowMo,
     },
     mergedConfig,
-    storageStatePath
+    storageStatePath,
+    (newRecruiters) => mergeRecruiters(newRecruiters, outputFilePath)
   );
-
-  let mergedRecruiters = newlyFetchedRecruiters;
-
-  // Check if an output file already exists
-  if (fs.existsSync(outputFilePath)) {
-    // If the output file exists, read in its contents
-    const previouslyFetchedRecruiters = JSON.parse(fs.readFileSync(outputFilePath));
-    
-    // Merge the new recruiter data with the existing data, using the recruiter's URL as the unique identifier
-    mergedRecruiters = _.mergeWith(
-      previouslyFetchedRecruiters,
-      newlyFetchedRecruiters,
-      (objValue, srcValue) => {
-        if (objValue.url == srcValue.url) {
-          // If a recruiter with the same URL already exists in the old data, replace it with the new data
-          return srcValue;
-        }
-      }
-    );
-  }
-
-
-  // write output to file
-  fs.writeFileSync(outputFilePath, JSON.stringify(mergedRecruiters, null, 2));
 };
