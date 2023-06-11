@@ -1,14 +1,5 @@
-# - 
-#   "Hi {{ recruiter.first_name }}, how are you doing? I'm a {{ candidate.position }} with 3 years of experience in web application development and automation. Can I send you my resume so that we can explore the possibility of working together at {{ recruiter.company }}? Thank you and have a great day.
-  
-#   {{ candidate.first_name }}"
-
-- 
-  "Hi {{ recruiter.first_name }}. My name is {{ candidate.first_name }} and I'm a {{ candidate.position }}. If you have a second, I'd love to connect with you and discuss how my {{ candidate.position | lower }} skills & experiences might help add value to {{ recruiter.company }}. Thank you and have a great day.
-  
-  - Manu"
-
-# - 
-#   "Hi {{ recruiter.first_name }}. Although we've never had the oppurtunity to work together, I've heard great things about {{ recruiter.company }}. I'd love to connect with you and discuss how my {{ candidate.position | lower }} skills & experiences might help add value to {{ recruiter.company }}. Thank you and have a great day.
-  
-#   {{ candidate.first_name }}"
+- Hi {{recruiter.first_name}}, I'm actively seeking new positions in {{candidate.position}} and was impressed by {{recruiter.company}}'s reputation for innovation. I'd love to connect and explore opportunities together. Best, {{candidate.first_name}}.
+- Dear {{recruiter.first_name}}, As I explore new opportunities in the {{candidate.position}} field, I've been drawn to the innovative work of {{recruiter.company}}. Let's connect and explore how we can collaborate. Best, {{candidate.first_name}}.
+- Hello {{recruiter.first_name}}, I'm searching for new positions in {{candidate.position}} and was impressed with {{recruiter.company}}'s track record of success. Let's connect and discuss potential roles. Best, {{candidate.first_name}}.
+- Hey {{recruiter.first_name}}, I'm actively seeking new roles in {{candidate.position}} and believe {{recruiter.company}} is a company that values excellence. Let's connect and explore potential opportunities. Sincerely, {{candidate.first_name}}.
+- Hi {{recruiter.first_name}}, As I explore new opportunities in the {{candidate.position}} field, I'm drawn to the innovative work of {{recruiter.company}}. I'd love to connect and learn more about potential roles. Best, {{candidate.first_name}}.
