@@ -66,13 +66,12 @@ const sendConnections = async (
 
       // get company name
       try {
-        await page.waitForSelector("a[href='#experience']");
-        const companyLink = await page.locator("a[href='#experience']");
+        const companyLink = await page.locator(".pv-text-details__right-panel-item-link[aria-label^='Current company'] .pv-text-details__right-panel-item-text");
         const companyName = await companyLink.innerText();
         recruiter.company = companyName;
       } catch (error) {
         console.log(
-          `Could not find company for ${recruiter.name.yellow} (${recruiter.url.yellow})`
+          `\tCould not find company for ${recruiter.name.yellow} (${recruiter.url.yellow}). Using 'your company' instead`
         );
         recruiter.company = "your company";
       }
@@ -96,7 +95,7 @@ const sendConnections = async (
 
       if (message.length >= 299) {
         console.log(
-          `Message is too long (${message.length}), skipping ${recruiter.name.yellow}`
+          `\tMessage is too long (${message.length}), skipping ${recruiter.name.yellow}`
         );
         continue;
       }
@@ -109,7 +108,7 @@ const sendConnections = async (
         connectButton = await page.locator(connectButtonSelector);
       } catch (error) {
         console.log(
-          `No "Connect" button found, skipping ${recruiter.name.yellow}`
+          `\tNo "Connect" button found, skipping ${recruiter.name.yellow}`
         );
         completedRecruitersConfig[recruiter.url] = { no_connection: true };
         fs.writeFileSync(
@@ -133,7 +132,7 @@ const sendConnections = async (
           "label:has-text('To verify this member knows you, please enter their email to connect. You can also include a personal note')"
         );
         console.log(
-          `${recruiter.name.yellow} requires you to enter their email. Skipping...`
+          `\t${recruiter.name.yellow} requires you to enter their email. Skipping...`
         );
         completedRecruitersConfig[recruiter.url] = { no_connection: true };
         fs.writeFileSync(
@@ -150,7 +149,7 @@ const sendConnections = async (
           timeout: 100,
         });
         console.log(
-          `${recruiter.name.yellow} requires you verify how you know them. Selecting "Other"`
+          `\t${recruiter.name.yellow} requires you verify how you know them. Selecting "Other"`
         );
         requiresToVerifyHowYouKnow = true;
       } catch (error) {}
@@ -169,7 +168,7 @@ const sendConnections = async (
       // send message by clicking send button
       await modal.locator("button:has-text('Send')").click();
 
-      console.log(`Sent connection to ${recruiter.name.yellow}`);
+      console.log(`Sent connection to ${recruiter.name}`.green);
 
       numberOfSentInvitations++;
       completedRecruitersConfig[recruiter.url] = { sent_invitation: true };
@@ -183,7 +182,7 @@ const sendConnections = async (
       // wait for modal to close
       await page.waitForTimeout(500);
     } catch (error) {
-      console.log(`Error sending connection to ${recruiter.name.yellow}`.red);
+      console.log(`\tError sending connection to ${recruiter.name.yellow}`.red);
       continue;
     }
   }
