@@ -26,6 +26,14 @@ exports.builder = {
 };
 
 exports.handler = async (argv) => {
-  const { email, password, storageStatePath } = argv;
-  await login(email, password, {}, storageStatePath);
+  const { email, password, storageStatePath, headless, sloMo } = argv;
+  await login({
+    email,
+    password,
+    launchOptions: {
+      headless,
+      sloMo,
+    },
+    storageStatePath,
+  });
 };
