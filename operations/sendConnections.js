@@ -5,23 +5,24 @@ var nunjucks = require("nunjucks");
 
 /**
  * Send connections to recruiters in LinkedIn
- * @param {object} launchOptions  - The options to pass to the launch method of Playwright
- * @param {object} linkedInConfig  - The configuration for the LinkedIn operations
- * @param {array} recruitersConfig  - The list of recruiters to send connections to
- * @param {string} completedRecruitersConfigPath  - A path to config of completed recruiters
- * @param {string} limit  - The maximum number of recruiters to send connections to
- * @param {string} messageTemplates - The message templates to use for the connections
- * @param {string} storageStatePath  - The path to the storage state JSON file
+ * @param {object} options - The options for the command
+ * @param {object} options.launchOptions  - The options to pass to the launch method of Playwright
+ * @param {object} options.linkedInConfig  - The configuration for the LinkedIn operations
+ * @param {array} options.recruitersConfig  - The list of recruiters to send connections to
+ * @param {string} options.completedRecruitersConfigPath  - A path to config of completed recruiters
+ * @param {string} options.limit  - The maximum number of recruiters to send connections to
+ * @param {string} options.messageTemplates - The message templates to use for the connections
+ * @param {string} options.storageStatePath  - The path to the storage state JSON file
  */
-const sendConnections = async (
+const sendConnections = async ({
   launchOptions,
   linkedInConfig,
   recruitersConfig,
   completedRecruitersConfigPath,
   limit,
   messageTemplates,
-  storageStatePath = "./storageState.json"
-) => {
+  storageStatePath = "./storageState.json",
+}) => {
   const completedRecruitersConfig = JSON.parse(
     fs.readFileSync(completedRecruitersConfigPath)
   );
@@ -66,7 +67,9 @@ const sendConnections = async (
 
       // get company name
       try {
-        const companyLink = await page.locator(".pv-text-details__right-panel-item-link[aria-label^='Current company'] .pv-text-details__right-panel-item-text");
+        const companyLink = await page.locator(
+          ".pv-text-details__right-panel-item-link[aria-label^='Current company'] .pv-text-details__right-panel-item-text"
+        );
         const companyName = await companyLink.innerText();
         recruiter.company = companyName;
       } catch (error) {

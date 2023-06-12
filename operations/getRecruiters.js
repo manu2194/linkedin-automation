@@ -70,17 +70,18 @@ const parseRecruiterSearchResult = async (locator) => {
  * proceeding with each iteration. The function also logs output to the console to provide
  * status updates on its progress.
  *
- * @param {object} launchOptions  - The options to pass to the launch method of Playwright
- * @param {object} linkedInConfig  - The configuration for the LinkedIn operations
- * @param {string} storageStatePath  - The path to the storage state JSON file
- * @param {function} mergeRecruitersCallback - A callback function to merge recruiters
+ * @param {object} options - The options to pass to the `getRecruiters` method
+ * @param {object} options.launchOptions  - The options to pass to the launch method of Playwright
+ * @param {object} options.linkedInConfig  - The configuration for the LinkedIn operations
+ * @param {string} options.storageStatePath  - The path to the storage state JSON file
+ * @param {function} options.mergeRecruitersCallback - A callback function to merge recruiters
  */
-const getRecruiters = async (
+const getRecruiters = async ({
   launchOptions,
   linkedInConfig,
   storageStatePath = "./storageState.json",
-  mergeRecruitersCallback
-) => {
+  mergeRecruitersCallback,
+}) => {
   const recruiters = [];
   const browser = await playwright.chromium.launch(launchOptions);
   const context = await browser.newContext({

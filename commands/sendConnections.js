@@ -76,16 +76,16 @@ exports.handler = async (argv) => {
   );
 
   // send connections to recruiters
-  const results = await sendConnections(
-    {
+  const results = await sendConnections({
+    launchOptions: {
       headless,
       slowMo,
     },
     config,
     recruiters,
-    path.resolve(resultsFilePath),
+    completedRecruitersConfigPath: path.resolve(resultsFilePath),
     limit,
     messageTemplates,
-    storageStatePath
-  );
+    storageStatePath,
+  });
 };

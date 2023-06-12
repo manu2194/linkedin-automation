@@ -102,13 +102,14 @@ exports.handler = async (argv) => {
     },
   });
 
-  await getRecruiters(
-    {
+  await getRecruiters({
+    launchOptions: {
       headless,
       slowMo,
     },
     mergedConfig,
     storageStatePath,
-    (newRecruiters) => mergeRecruiters(newRecruiters, outputFilePath)
-  );
+    mergeRecruitersCallback: (newRecruiters) =>
+      mergeRecruiters(newRecruiters, outputFilePath),
+  });
 };
